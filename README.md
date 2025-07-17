@@ -25,12 +25,13 @@
   - 大语言模型回复时逐字生成，提升交互流畅性和实时感。
 - 🔒 回复时禁用输入提交（Input Locking）： 
   - 在模型生成回复期间自动禁用输入提交，防止重复请求和界面混乱。
+
 ---
 
 ## 🧩 项目架构概览
 
 ```
-Qwen-Multimodal-Demo/
+MultimodalChat/
 ├── README.md                 # 项目总说明文档，介绍功能、依赖和使用方式
 ├── .env                      # 环境变量配置文件（如 API Key、模型路径等）
 ├── config.py                 # 配置中心：包含 SESSION_ID、Prompt参数
@@ -71,6 +72,7 @@ pip install -r requirements.txt
 ```
 
 ---
+
 ## ⚙️ 项目配置指南
 
 本指南旨在帮助你快速完成项目的环境与模块配置，确保系统能够顺利运行并支持多模态对话功能。通过以下步骤，你可以轻松设置 API 密钥、模型参数以及核心功能模块。
@@ -128,9 +130,13 @@ OPENAI_BASE_URL=https://example.url
 
 祝你开源顺利，收获满满 Star⭐！🎉
 
+---
+
 # 附：本地部署大模型指南
 
 本节介绍如何在本地服务器上部署 Qwen 系列多模态大模型（如 Qwen2.5-Omni-3B），以便在本项目中实现高性能、低延迟的推理服务。
+
+---
 
 ## 1. 下载模型（以魔塔社区模型为例）
 
@@ -144,19 +150,17 @@ model_dir = snapshot_download('Qwen/Qwen2.5-Omni-3B', cache_dir='/root/autodl-tm
 
 该命令会将模型文件下载至指定目录，供后续部署使用。
 
+---
+
 ## 2. 安装音频支持库
 
 若需支持语音输入处理，请安装带有音频模块的 vLLM：
 
-bash
-
-浅色版本
-
-
-
 ```
 pip install vllm[audio]
 ```
+
+---
 
 ## 3. 启动模型服务
 
@@ -179,7 +183,7 @@ python -m vllm.entrypoints.openai.api_server \
 >
 > 以上启动命令一般情况下即可启动成功。
 >
-> 自定义部署本地大模型服务时，您可能需要根据实际硬件环境和需求调整一些关键参数。以下是如何配置这些参数以及如何确认部署成功的详细步骤。
+> 自定义部署本地大模型服务时，你可能需要根据实际硬件环境和需求调整一些关键参数。以下是如何配置这些参数以及如何确认部署成功的详细步骤。
 >
 > #### 1. 根据实际情况配置部署参数
 >
@@ -209,7 +213,7 @@ python -m vllm.entrypoints.openai.api_server \
 >
 > **最大上下文长度 (`--max-model-len`)**
 >
-> 设置最大上下文长度（以 token 数量表示），这取决于您的 GPU 显存大小。对于一张 NVIDIA RTX 4090D 显卡，建议值为 `8k`：
+> 设置最大上下文长度（以 token 数量表示），这取决于你的 GPU 显存大小。对于一张 NVIDIA RTX 4090D 显卡，建议值为 `8k`：
 >
 > ```
 > --max-model-len 8k
@@ -217,7 +221,7 @@ python -m vllm.entrypoints.openai.api_server \
 >
 > #### 2. 替换其它模型的配置
 >
-> 如果您希望部署其他模型，请替换以下参数：
+> 如果你希望部署其他模型，请替换以下参数：
 >
 > **模型名称 (`--served-model-name`)**
 >
@@ -229,7 +233,7 @@ python -m vllm.entrypoints.openai.api_server \
 >
 > **参数精度 (`dtype`)**
 >
-> 选择适合您硬件的最佳参数精度类型。常见的选项包括 `float32`、`bfloat16` 和 `float16`。对于大多数现代 GPU，推荐使用 `bfloat16`：
+> 选择适合你硬件的最佳参数精度类型。常见的选项包括 `float32`、`bfloat16` 和 `float16`。对于大多数现代 GPU，推荐使用 `bfloat16`：
 >
 > ```
 > --dtype bfloat16
@@ -247,6 +251,8 @@ python -m vllm.entrypoints.openai.api_server \
 > ```
 >
 > 这表明服务器已成功启动，并准备接受请求。
+
+---
 
 ## 4. 配置本地 API 地址
 
